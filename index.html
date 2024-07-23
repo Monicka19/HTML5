@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<div class="gallery">
+    <img src="image1.jpg" alt="Description of image 1" tabindex="0">
+    <img src="image2.jpg" alt="Description of image 2" tabindex="0">
+    <img src="image3.jpg" alt="Description of image 3" tabindex="0">
+    <img src="image4.jpg" alt="Description of image 4" tabindex="0">
+    <img src="image5.jpg" alt="Description of image 5" tabindex="0">
+    <img src="image6.jpg" alt="Description of image 6" tabindex="0">
+</div>
+
+<script>
+    window.addEventListener("load", () => {
+        console.log("Page has loaded");
+
+        const images = document.querySelectorAll(".gallery img");
+
+        images.forEach(image => {
+            image.addEventListener("focus", (event) => {
+                event.target.style.border = "2px solid blue";
+                addTabFocus(event.target);
+            });
+
+            image.addEventListener("blur", (event) => {
+                event.target.style.border = "";
+                removeTabFocus(event.target);
+            });
+
+            image.addEventListener("mousemove", (event) => {
+                console.log(`Mouse moved over: ${event.target.alt} at (${event.clientX}, ${event.clientY})`);
+            });
+        });
+    });
+
+    function addTabFocus(image) {
+        image.setAttribute("data-tabfocus", "true");
+        console.log("Tab focus added:", image.alt);
+    }
+
+    function removeTabFocus(image) {
+        image.removeAttribute("data-tabfocus");
+        console.log("Tab focus removed:", image.alt);
+    }
+</script>
+
+</body>
+</html>
